@@ -1,5 +1,5 @@
 if window.DeviceOrientationEvent
-  console.log 'DeviceOrientation is supported'
+  console.log 'DeviceOrientation is supportedd'
 
   $('#doEvent')
     .innerHTML = 'DeviceOrientation'
@@ -52,7 +52,7 @@ if Modernizr.geolocation
     navigator.geolocation.getCurrentPosition position_handler
 
   position_handler = (pos) ->
-    console.log 'got loc', pos.coords
+    # console.log 'got loc', pos.coords
     coords = pos.coords
     $('#doAccuracy').text coords.accuracy
     $('#doAltitude').text coords.altitude
@@ -65,6 +65,13 @@ if Modernizr.geolocation
   # set up listener
   get_location(position_handler)
 
+  # lather, rinse, repeat
+  go = () ->
+    get_location(position_handler)
+
+  setInterval go, 1000
+
 else
   $('#doEvent')
     .innerHTML += 'Geolocation not supported.'
+

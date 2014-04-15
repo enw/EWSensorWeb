@@ -1,8 +1,8 @@
 (function() {
-  var devOrientHandler, get_location, position_handler;
+  var devOrientHandler, get_location, go, position_handler;
 
   if (window.DeviceOrientationEvent) {
-    console.log('DeviceOrientation is supported');
+    console.log('DeviceOrientation is supportedd');
     $('#doEvent').innerHTML = 'DeviceOrientation';
     devOrientHandler = function(eventData) {
       var dir, logo, tiltFB, tiltLR;
@@ -27,7 +27,6 @@
     };
     position_handler = function(pos) {
       var coords;
-      console.log('got loc', pos.coords);
       coords = pos.coords;
       $('#doAccuracy').text(coords.accuracy);
       $('#doAltitude').text(coords.altitude);
@@ -38,6 +37,10 @@
       return $('#doSpeed').text(coords.speed);
     };
     get_location(position_handler);
+    go = function() {
+      return get_location(position_handler);
+    };
+    setInterval(go, 1000);
   } else {
     $('#doEvent').innerHTML += 'Geolocation not supported.';
   }
